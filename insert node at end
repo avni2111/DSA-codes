@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
+    int data;
+    struct node* link;
+};
+
+void insertEnd(struct node** head, int data) {
+    struct node* Node = malloc(sizeof(struct node));
+    Node->data = data;
+    Node->link = NULL;
+
+    if (*head == NULL) {
+        *head = Node;
+        return;
+    }
+
+
+    struct node* current = *head;
+    while (current->link != NULL) {
+        current = current->link;
+    }
+
+
+    current->link = Node;
+}
+void printList(struct node* head) {
+    struct node* current = head;
+    while (current != NULL) {
+        printf("%d -> ", current->data);
+        current = current->link;
+    }
+
+}
+
+int main() {
+    struct node* head = NULL;
+    insertEnd(&head, 10);
+    insertEnd(&head, 20);
+    insertEnd(&head, 30);
+
+    printf("Linked List: ");
+    printList(head);
+
+    return 0;
+}
+
