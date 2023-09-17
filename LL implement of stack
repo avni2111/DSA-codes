@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
+    int data;
+    struct node* link;
+};
+
+struct node* top = NULL;
+
+void push(int data) {
+    struct node* newnode;
+    newnode = malloc(sizeof(struct node));
+
+    if (newnode == NULL) {
+        printf("Stack overflow\n");
+        exit(1);
+    }
+    newnode->data = data;
+    newnode->link = top;
+    top = newnode;
+}
+
+void print() {
+    struct node* temp;
+    temp = top;
+    printf("Stack elements are: ");
+    while (temp != NULL) {
+        printf("%d ", temp->data);
+        temp = temp->link;
+    }
+    printf("\n");
+}
+
+int main() {
+    int choice, data;
+    while (1) {
+        printf("1. Push\n");
+        printf("2. Print\n");
+        printf("3. Quit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        switch (choice) {
+        case 1:
+            printf("Enter element to be pushed: ");
+            scanf("%d", &data);
+            push(data);
+            break;
+        case 2:
+            print();
+            break;
+        case 3:
+            exit(0);
+        default:
+            printf("Wrong choice\n");
+            break;
+        }
+    }
+    return 0;
+}
