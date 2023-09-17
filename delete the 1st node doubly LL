@@ -1,0 +1,68 @@
+#include<Stdio.h>
+#include<stdlib.h>
+struct node{
+
+struct node*prev;
+int data;
+struct node*next;
+};
+
+struct node*addtoempty(struct node*head,int data)
+{
+    struct node*temp=malloc(sizeof(struct node));
+  temp->prev=NULL;
+  temp->data=data;
+  temp->next=NULL;
+  head=temp;
+  return head;
+}
+
+struct node*addatend(struct node*head,int data)
+{
+    struct node*temp,*tp;
+    temp=malloc(sizeof(struct node));
+    temp->prev=NULL;
+    temp->data=data;
+    temp->next=NULL;
+    tp=head;
+    while(tp->next!=NULL)
+        tp=tp->next;
+    tp->next=temp;
+    temp->prev=tp;
+    return head;}
+
+    struct node*delfirst(struct node*head)
+    {
+        struct node*temp=head;
+        head=head->next;
+        free(temp);
+        temp=NULL;
+        head->prev=NULL;
+        return head;
+    }
+
+    void print(struct node*head)
+    {
+        struct node*ptr=head;
+        while(ptr!=NULL)
+        {
+            printf("%d",ptr->data);
+            ptr=ptr->next;
+        }
+    }
+    int main()
+    {
+        struct node*head=NULL;
+        struct node*ptr;
+        head=addtoempty(head,34);
+        head=addatend(head,45);
+        head=addatend(head,7);
+        printf("before delete");
+        print(head);
+        head=delfirst(head);
+        printf("after delete");
+        print(head);
+        return 0;
+    }
+
+
